@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pedido.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/pedido")]
     [ApiController]
     public class PedidoController : ControllerBase
     {

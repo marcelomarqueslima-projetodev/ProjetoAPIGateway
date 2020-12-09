@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Catalogo.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +9,37 @@ using System.Threading.Tasks;
 
 namespace Catalogo.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/catalogo")]
     [ApiController]
     public class CatalogoController : ControllerBase
     {
-        // GET: api/<CatalogoController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly List<CatalogoDTO> catalogo = new List<CatalogoDTO>()
         {
-            return new string[] { "Produto 1", "Produto 2" };
+            new CatalogoDTO()
+            {
+                CatalogoId = 1,
+                Name = "Catalogo 1"
+            },
+            new CatalogoDTO()
+            {
+                CatalogoId = 2,
+                Name = "Catalogo 2"
+            },
+            new CatalogoDTO()
+            {
+                CatalogoId = 3,
+                Name = "Catalogo 3"
+            }
+        };
+        [HttpGet]
+        public List<CatalogoDTO> All()
+        {
+            return catalogo;
+        }
+        [HttpGet("getbyid/{id}")]
+        public CatalogoDTO GetById(int id)
+        {
+            return catalogo.FirstOrDefault(u => u.CatalogoId == id);
         }
     }
 }
