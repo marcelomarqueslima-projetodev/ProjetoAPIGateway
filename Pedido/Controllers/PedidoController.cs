@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
+using Pedido.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Pedido.Controllers
 {
@@ -12,11 +9,33 @@ namespace Pedido.Controllers
     [ApiController]
     public class PedidoController : ControllerBase
     {
-        // GET: api/<PedidoController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly List<ProdutoDTO> produto = new List<ProdutoDTO>()
         {
-            return new string[] { "Item 1", "Item 2" };
+            new ProdutoDTO()
+            {
+                ProdutoId = 1,
+                Name = "Produto 1"
+            },
+            new ProdutoDTO()
+            {
+                ProdutoId = 2,
+                Name = "Produto 2"
+            },
+            new ProdutoDTO()
+            {
+                ProdutoId = 3,
+                Name = "Produto 3"
+            }
+        };
+        [HttpGet]
+        public List<ProdutoDTO> All()
+        {
+            return produto;
+        }
+        [HttpGet("getbyid/{id}")]
+        public ProdutoDTO GetById(int id)
+        {
+            return produto.FirstOrDefault(u => u.ProdutoId == id);
         }
     }
 }
